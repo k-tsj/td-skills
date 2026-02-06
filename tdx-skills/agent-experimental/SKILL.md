@@ -428,7 +428,7 @@ root.render(<App />);
 tdx agent push agents/my-project
 ```
 
-After pushing, ask the user to confirm the Artifact ID.
+**IMPORTANT**: After pushing, you MUST ask the user to provide the Artifact ID. The `tdx` CLI does not display the Artifact ID, so you cannot retrieve it yourself. Ask the user to check the web interface and provide the ID.
 
 ### Step 2: Create Knowledge Base
 
