@@ -272,6 +272,24 @@ Implemented functionality:
 - **put_spreadsheet_sheet**: Add sheets (cell data, styles, merge info) to workbook
 - **Univer Artifact**: Display the spreadsheet in browser
 
+### Key Takeaways
+
+Essential patterns from this Complete Example:
+
+Artifact Design:
+- Separate static files into the `files/` directory and reference them via `config.files[filename].content` rather than implementing everything in the handler
+- Declare dependencies in `package.json` (always include react and react-dom)
+- Keep `code.js` handler focused on dynamic processing while placing static components (App.js, index.js, index.html) under `files/`
+- Clearly separate responsibilities between Knowledge Base and Artifact for reusability:
+  - Knowledge Base: Data creation and manipulation logic
+  - Artifact: Data display and rendering
+
+Knowledge Base Design:
+- Store Artifact IDs in KB variables and reference via `td.env.EXPERIMENTAL_ARTIFACT_ID`
+- Carefully design data flow between functions:
+  - Creation functions return paths in their response (e.g., `create_spreadsheet` returns `artifact.pathPrefix`)
+  - Manipulation functions accept paths as arguments (e.g., `put_spreadsheet_sheet` takes path parameter)
+
 ### Step 1: Create Experimental Artifact
 
 Create an Artifact that displays spreadsheets using the Univer library. This Artifact loads workbook data created by the Knowledge Base and renders it in the browser.
