@@ -606,10 +606,39 @@ playwright-cli click <menu-ref>  # Click resource menu item
 
 # Take screenshot to verify artifacts are loaded
 playwright-cli screenshot
-
-# Clean up when done
-playwright-cli close-all
 ```
+
+##### Take output of console.log
+
+For general debugging, use console.log to output debug information, push changes, reproduce the issue in browser to generate debug logs, and then analyze logs to identify and fix the bug:
+
+1. Add console.log statements to code.js or artifact files
+2. Push updated artifact with `tdx agent push`
+3. Clear existing console logs:
+   ```bash
+   playwright-cli console --clear
+   ```
+4. Reproduce the issue in browser (ask user to perform actions that trigger the bug)
+5. Capture console output:
+   ```bash
+   playwright-cli console
+   ```
+6. Analyze the Result section (ignore Page and Events sections)
+
+Example console output:
+
+```
+### Result
+- [Console](.playwright-cli/console-2026-02-06T11-12-09-811Z.log)
+### Page
+- Page URL: https://example.com/app/chats/show/019c326c-b7e9-7543-8ce5-7da9aa85ffee
+- Page Title: #019c326c-b7e9-7543-8ce5-7da9aa85ffee Show Chat | LLM Console
+- Console: 2 errors, 0 warnings
+### Events
+- New console entries: .playwright-cli/console-2026-02-06T09-41-40-945Z.log#L289-L310
+```
+
+**Focus on the Result section** - the console log file contains the actual debug output. Read this file to analyze errors and debug information.
 
 Reference:
 - [playwright-mcp GitHub](https://github.com/microsoft/playwright-mcp)
