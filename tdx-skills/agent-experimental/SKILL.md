@@ -583,7 +583,7 @@ The created spreadsheet is displayed interactively in the browser using Univer:
 
 ### Debugging Knowledge Bases
 
-Use the `agent` skill to chat for testing KB function calls, and use the `agent-debug` skill to analyze chat logs.
+Use the `agent-debug` skill to analyze chat logs.
 
 ### Debugging Artifacts (Browser Rendering)
 
@@ -634,15 +634,12 @@ For general debugging, use console.log to output debug information, push changes
 
 1. Add console.log statements to code.js or artifact files
 2. Push updated artifact with `tdx agent push`
-3. Clear existing console logs:
-   ```bash
-   playwright-cli console --clear
-   ```
-4. Reproduce the issue in browser (ask user to perform actions that trigger the bug)
-5. Capture console output:
+3. Reproduce the issue in browser (ask user to perform actions that trigger the bug)
+4. Capture console output:
    ```bash
    playwright-cli console
    ```
+   If confused by mixed logs from previous runs, use --clear option to remove all logs and retry
 6. Analyze the Result section (ignore Page and Events sections)
 
 Example console output:
