@@ -587,7 +587,7 @@ Use the `agent` skill to chat for testing KB function calls, and use the `agent-
 
 ### Debugging Artifacts (Browser Rendering)
 
-Use Playwright CLI to debug artifact rendering issues interactively.
+Use the `playwright-cli` command (NOT the `playwright` command) to debug artifact rendering issues interactively.
 
 #### 1. Setup Playwright CLI
 
@@ -602,24 +602,26 @@ playwright-cli install chromium
 
 #### 2. Open Browser and Navigate to Chat
 
-Ask the user to navigate to the target chat in LLM Console, then open Playwright:
+Open the browser using `playwright-cli` (NOT `playwright`), then ask the user to navigate to the target chat:
 
 ```bash
-# Open browser with Playwright CLI
+# Open browser with playwright-cli (NOT playwright)
 playwright-cli --headed --browser chrome open https://www.treasuredata.com/
 ```
+
+**IMPORTANT**: Do NOT use `playwright-cli close-all` - it clears authentication and requires re-login. Keep the browser session open throughout debugging.
 
 **Ask user**: "Please navigate to the LLM Console chat where the artifact is displayed, then let me know when ready."
 
 #### 3. Debug Artifact Rendering
 
-After user confirms page navigation is complete, start interactive debugging:
+After user confirms the initial page navigation is complete, perform all subsequent testing operations yourself using `playwright-cli` commands:
 
 ```bash
 # Take snapshot of current page state
 playwright-cli snapshot
 
-# Click on UI elements (use refs from snapshot)
+# Click on UI elements yourself (use refs from snapshot)
 playwright-cli click <menu-ref>  # Click resource menu item
 
 # Take screenshot to verify artifacts are loaded
